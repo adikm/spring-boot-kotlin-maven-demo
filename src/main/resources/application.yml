@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: spring-boot-kotlin-maven-demo
+server:
+  port: 9999
+  use-forward-headers: true
