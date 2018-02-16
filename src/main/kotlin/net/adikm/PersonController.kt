@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/persons")
-class DemoController {
+class PersonController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     fun getAll(): List<Person> {
-        logger.info("Returning list of Person objects")
+        logger.info { "Returning list of Person objects" }
 
         return listOf(Person("John", "Doe", 12), Person("Amanda", "Doe", 14))
     }

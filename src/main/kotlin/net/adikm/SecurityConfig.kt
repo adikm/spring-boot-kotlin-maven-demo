@@ -11,7 +11,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
 
-        logger.info("Security initialization")
+        logger.info { "Security initialization" }
 
         http.csrf().disable()
 

@@ -14,9 +14,10 @@ import kotlin.test.*
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class DemoControllerTest {
+class PersonControllerTest {
 
-    @Autowired private lateinit var ctx: WebApplicationContext
+    @Autowired
+    private lateinit var ctx: WebApplicationContext
 
     private lateinit var mockMvc: MockMvc
 
@@ -26,7 +27,7 @@ class DemoControllerTest {
     }
 
     @Test
-    fun getAllTemplates() {
+    fun getAllTest() {
         val result = this.mockMvc.perform(get("/persons")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk)
