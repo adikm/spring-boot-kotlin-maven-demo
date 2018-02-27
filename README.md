@@ -1,6 +1,6 @@
 # Spring Boot Kotlin Maven demo
 
-This is a simple example project to demonstrate that how Spring Boot works with Kotlin and Maven
+This is a simple example project to demonstrate that Spring Boot 2 works with Kotlin and Maven
 
 You can launch the application from command line by running:
 

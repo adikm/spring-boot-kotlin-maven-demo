@@ -10,15 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
-
         logger.info { "Security initialization" }
 
-        http.csrf().disable()
-
-        http.httpBasic().and().authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS).permitAll()
-                .antMatchers(HttpMethod.GET, "/**").permitAll()
-                .anyRequest().authenticated()
+        http.authorizeRequests().anyRequest().permitAll().and().httpBasic()
     }
 
     companion object : KLogging()
