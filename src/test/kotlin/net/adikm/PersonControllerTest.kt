@@ -2,39 +2,31 @@ package net.adikm
 
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
 import org.springframework.http.MediaType
 import org.springframework.test.context.junit4.SpringRunner
-import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import org.springframework.test.web.servlet.setup.MockMvcBuilders
-import org.springframework.web.context.WebApplicationContext
+import org.springframework.test.web.reactive.server.WebTestClient
 import kotlin.test.*
 
+
 @RunWith(SpringRunner::class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@WebFluxTest
 class PersonControllerTest {
 
     @Autowired
-    private lateinit var ctx: WebApplicationContext
-
-    private lateinit var mockMvc: MockMvc
-
-    @BeforeTest
-    fun setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build()
-    }
+    private lateinit var webClient: WebTestClient
 
     @Test
     fun getAllTest() {
-        val result = this.mockMvc.perform(get("/persons")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk)
-
         val expectedJson = """[{"firstName":"John","lastName":"Doe","age":12},{"firstName":"Amanda","lastName":"Doe","age":14}]"""
 
-        assertEquals(expectedJson, result.andReturn().response.contentAsString)
+        val bodySpec: WebTestClient.BodySpec<String, *> = webClient.get().uri("/persons")
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus().isOk
+                .expectBody(String::class.java)
+
+        assertEquals(expectedJson, bodySpec.returnResult().responseBody)
     }
 
 }
