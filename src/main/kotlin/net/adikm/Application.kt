@@ -1,11 +1,11 @@
 package net.adikm
 
-import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class KotlinApplication
+class Application
 
 fun main(args: Array<String>) {
-    SpringApplication.run(KotlinApplication::class.java, *args)
+    runApplication<Application>(*args)
 }
